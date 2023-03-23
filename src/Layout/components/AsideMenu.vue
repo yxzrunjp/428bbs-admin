@@ -1,4 +1,5 @@
 <template>
+    <!-- :unique-opened="true" 默认展开一个菜单 -->
     <el-menu :collapse="isShrink" :collapse-transition="false" :default-openeds="defaultOpen" :default-active="menuActive"
         :active-text-color="'#ff4757'" :background-color="'#ddd'" class="sys-menu">
         <!-- 一级 -->
@@ -18,7 +19,7 @@
 
             <router-link v-else :to="'/' + menu.path">
                 <el-menu-item :index="'/' + menu.path">
-                    <!-- <i v-if="isShrink" :class="['iconfont', menu.meta.icon]"></i> -->
+                    <i v-if="isShrink" :class="['iconfont', menu.meta.icon]"></i>
                     <template #title>
                         <i :class="['iconfont', menu.meta.icon]"></i>
                         <span>{{ menu.meta.label }}</span>
@@ -40,12 +41,17 @@ const route = useRoute()
 
 const pagePxStore = usePagePxStore()
 const { isShrink } = storeToRefs(pagePxStore)
-// 配置菜单默认展开
+
 const defaultOpenList = []
 MenuList.forEach(el => {
+    // 配置菜单默认全部展开
     if (el.children) {
         defaultOpenList.push(`/${el.path}`)
     }
+    // 默认展开第一个
+    // if (el.children&&defaultOpenList.length === 0) {
+    //     defaultOpenList.push(`/${el.path}`)
+    // }
 })
 
 const defaultOpen = reactive(defaultOpenList)
@@ -59,4 +65,39 @@ watch(() => route.path, (newV) => {
 }, { immediate: true, deep: true })
 </script>
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+// .el-menu-vertical-demo:not(.el-menu--collapse) {
+//     width: 260px;
+//     height: 100%;
+// }
+.sys-menu {
+    // background-color: #dbd8d8;
+    height: calc(100% - 50px);
+
+    .el-sub-menu {
+        i {
+            margin-right: 10px;
+        }
+
+        // :deep(.el-sub-menu__title) {
+        //     &:hover {
+        //         background-color: #ffb;
+        //     }
+        // }
+
+    }
+
+    .el-menu-item {
+        background-color: #b5b3b3;
+
+        i {
+            margin-right: 10px;
+        }
+
+
+        &:hover {
+            background-color: #fff;
+        }
+    }
+}
+</style>

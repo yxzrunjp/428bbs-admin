@@ -35,7 +35,7 @@ import { useRoute } from 'vue-router'
 import { reactive, watch } from 'vue';
 
 const pagePxStore = usePagePxStore()
-const { asideWidth, headerHeight,isShrink } = storeToRefs(pagePxStore)
+const { asideWidth, headerHeight, isShrink } = storeToRefs(pagePxStore)
 
 const route = useRoute()
 
@@ -43,9 +43,9 @@ const route = useRoute()
  * 当前收缩侧边栏会有卡顿现象，暂不实现该功能
  */
 const handleCollapse = () => {
-    return
+    // return
     pagePxStore.$patch({
-        isShrink:!isShrink.value,
+        isShrink: !isShrink.value,
     })
 }
 const breadcrumbList = reactive([])
@@ -63,44 +63,13 @@ watch(() => route, (newV) => {
     .el-container {
         .menu-aside {
             height: 100vh;
-            transition: width .3s;
+            // transition: width .3s;
 
             .sys-title {
                 background-color: aquamarine;
                 text-align: center;
                 height: 50px;
                 line-height: 50px;
-            }
-
-            .sys-menu {
-                // background-color: #dbd8d8;
-                height: calc(100% - 50px);
-
-                .el-sub-menu {
-                    i {
-                        margin-right: 10px;
-                    }
-
-                    // :deep(.el-sub-menu__title) {
-                    //     &:hover {
-                    //         background-color: #ffb;
-                    //     }
-                    // }
-
-                }
-
-                .el-menu-item {
-                    background-color: #b5b3b3;
-
-                    i {
-                        margin-right: 10px;
-                    }
-
-
-                    &:hover {
-                        background-color: #fff;
-                    }
-                }
             }
         }
 
