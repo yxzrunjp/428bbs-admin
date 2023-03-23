@@ -2,7 +2,7 @@
     <div class="layout">
         <el-container>
             <el-aside class="menu-aside" :width="asideWidth + 'px'">
-                <div class="sys-title">
+                <div class="sys-title" :style="{ height: headerHeight + 'px', lineHeight: headerHeight + 'px' }">
                     <template v-if="!isShrink">
                         浮云论坛管理系统
                     </template>
@@ -68,8 +68,6 @@ watch(() => route, (newV) => {
             .sys-title {
                 background-color: aquamarine;
                 text-align: center;
-                height: 50px;
-                line-height: 50px;
             }
         }
 
@@ -80,6 +78,7 @@ watch(() => route, (newV) => {
                 align-items: center;
 
                 .shrink-icon {
+                    cursor: pointer;
                     margin-right: 10px;
                 }
             }
