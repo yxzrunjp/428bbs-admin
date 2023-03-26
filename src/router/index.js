@@ -1,5 +1,6 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import { MenuList } from '@/utils/setting.js'
+
 const module = import.meta.glob(['@/views/*/*/Index.vue', '@/views/*/Index.vue'])
 // 动态加载路由
 const loadRoute = (arr) => {
@@ -40,6 +41,11 @@ const router = createRouter({
       component: () => import('@/views/Login/Index.vue'),
     }
   ]
+})
+
+router.beforeEach((to,from,next)=>{
+  document.title = to.meta.label
+  next()
 })
 
 export default router
