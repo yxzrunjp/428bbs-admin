@@ -114,10 +114,8 @@ watch(() => route, (newV) => {
     .el-container {
         .menu-aside {
             height: 100vh;
-            // transition: width .3s;
-
             .sys-title {
-                background-color: aquamarine;
+                background-color: $color-menu-bg;
                 text-align: center;
             }
         }

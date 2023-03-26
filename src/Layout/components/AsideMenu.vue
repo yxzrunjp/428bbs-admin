@@ -1,7 +1,7 @@
 <template>
     <!-- :unique-opened="true" 默认展开一个菜单 -->
     <el-menu :collapse="isShrink" :collapse-transition="false" :default-openeds="defaultOpen" :default-active="menuActive"
-        :active-text-color="'#ff4757'" :background-color="'#ddd'" class="sys-menu">
+        class="sys-menu">
         <!-- 一级 -->
         <template v-for="menu in menuList" :key="menu.path">
             <el-sub-menu v-if="menu.children" :index="'/' + menu.path">
@@ -66,14 +66,10 @@ watch(() => route.path, (newV) => {
 </script>
 
 <style lang="scss" scoped>
-// .el-menu-vertical-demo:not(.el-menu--collapse) {
-//     width: 260px;
-//     height: 100%;
-// }
 .sys-menu {
-    // background-color: #dbd8d8;
+    background-color: $color-menu-bg;
     height: calc(100% - 50px);
-
+    border-right: none;
     .el-sub-menu {
         i {
             margin-right: 10px;
@@ -88,7 +84,8 @@ watch(() => route.path, (newV) => {
     }
 
     .el-menu-item {
-        background-color: #b5b3b3;
+        background-color: $color-menu-item-bg;
+
 
         i {
             margin-right: 10px;
@@ -96,8 +93,12 @@ watch(() => route.path, (newV) => {
 
 
         &:hover {
-            background-color: #fff;
+            background-color: $color-menu-bg;
         }
+    }
+
+    .el-menu-item.is-active {
+        color:$color-dark-blue;
     }
 }
 </style>

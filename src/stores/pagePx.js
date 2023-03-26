@@ -14,6 +14,10 @@ export const usePagePxStore = defineStore('pagePx', {
     getters: {
         asideWidth: (state) => {
             return state.isShrink ? 63 : 200
+        },
+        headerAndMenuHeight:(state)=>{
+            // 40属于el-main的上下padding之和
+            return state.headerHeight+state.tabsHeight + 40
         }
     }
 })

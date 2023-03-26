@@ -1,7 +1,7 @@
 <template>
-    <div class="table-wrap">
+    <div class="table-wrap" :style="{height:tableOptions.height + 'px'}">
         <div class="table">
-            <el-table stripe border highlight-current-row :height="tableOptions.height - paginationHeight" ref="tableRef"
+            <el-table stripe border highlight-current-row :max-height="tableOptions.height - paginationHeight" ref="tableRef"
                 :data="data.list" style="width: 100%" @selection-change="handleSelectionChange" @row-click="handleRowClick">
                 <el-table-column v-if="tableOptions.showSelect" type="selection" width="55" />
                 <template v-for="column in tableOptions.tableColumn" :key="column.prop">
@@ -86,6 +86,9 @@ const handleCurrentChange = (page) => {
 
 <style lang="scss" scoped>
 .table-wrap {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
     .pagination {
         display: flex;
         justify-content: flex-end;

@@ -1,10 +1,10 @@
 <template>
     <div class="article">
         <Table :data="data" :tableOptions="tableOptions">
-            <template #address="{row}">
+            <template #address="{ row }">
                 <div class="address">地址：{{ row.address }}</div>
             </template>
-            <template #name="{row}">
+            <template #name="{ row }">
                 <div class="name">名字：{{ row.name }}</div>
             </template>
         </Table>
@@ -12,7 +12,13 @@
 </template>
 
 <script setup>
-import Table from '@/components/Table.vue';
+import { usePagePxStore } from '@/stores/pagePx.js'
+import { storeToRefs } from 'pinia'
+const pagePxStore = usePagePxStore()
+const { headerAndMenuHeight } = storeToRefs(pagePxStore)
+// 内容区域高度 = 可视区域高度-头部及标签高度 - 表单部分高度
+const height = document.documentElement.clientHeight - headerAndMenuHeight.value
+console.log(height);
 const tableData = [
     {
         date: '2016-05-03',
@@ -45,7 +51,7 @@ const data = {
 
 const tableOptions = {
     showSelect: false,
-    height:700,
+    height,
     tableColumn: [
         {
             prop: 'date',
@@ -54,7 +60,7 @@ const tableOptions = {
         {
             prop: 'name',
             label: '名字',
-            scoped:'name'
+            scoped: 'name'
         },
         {
             prop: 'address',
