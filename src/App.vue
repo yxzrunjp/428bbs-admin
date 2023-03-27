@@ -17,6 +17,7 @@ const globalInfo = readonly({
   avatarUrl: '/api/file/getAvatar',
   getImageUrl:'/api/file/getImage',
   attachmentDownloadUrl:'/api/forum/attachmentDownload',
+  clientAddress:'http://localhost:3000',
 })
 
 provide('globalInfo', globalInfo)

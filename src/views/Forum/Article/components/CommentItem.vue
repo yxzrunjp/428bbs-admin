@@ -5,12 +5,12 @@
         </div>
         <div class="right">
             <div class="nickname-wrap">
-                <span class="nickname">{{ data.nickName }}</span>
+                <a class="text-btn" :href="`${globalInfo.clientAddress}/user/${data.userId}`" target="_blank">
+                    {{ data.nickName }}
+                </a>
             </div>
             <div class="comment-content">
-                <div class="content-box">
-                    <div class="content">{{ data.content }}</div>
-                </div>
+                <div class="content">{{ data.content }}</div>
                 <div class="content-img" v-if="data.imgPath">
                     <Cover :url="`${globalInfo.getImageUrl}/${data.imgPath.replace('.', '_.')}`" />
                 </div>
@@ -56,26 +56,8 @@ const props = defineProps({
         border-bottom: 1px solid #ddd;
         padding-bottom: 10px;
 
-        .nickname-wrap {
-            display: flex;
-            justify-content: flex-start;
-            align-items: center;
-
-            .nickname {
-                color: $color-blue;
-            }
-        }
-
         .comment-content {
             margin: 8px 0;
-
-            .content-box {
-                display: flex;
-                justify-content: flex-start;
-                align-items: center;
-
-            }
-
 
             .content-img {
                 margin-top: 6px;

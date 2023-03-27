@@ -67,7 +67,11 @@
                 <div class="user-info">
                     <Avatar :userId="row.userId" :link="false" :size="50"></Avatar>
                     <div class="user-info-left">
-                        <div class="nickname text-btn">{{ row.nickName }}</div>
+                        <div class="nickname">
+                            <a class="text-btn" :href="`${globalInfo.clientAddress}/user/${row.userId}`" target="_blank">
+                                {{ row.nickName }}
+                            </a>
+                        </div>
                         <div class="address">{{ row.userIpAddress }}</div>
                     </div>
                 </div>
@@ -79,7 +83,11 @@
             </template>
             <!-- 标题 -->
             <template #title="{ row }">
-                <div class="title text-btn">{{ row.title }}</div>
+                <div class="title">
+                    <a class="text-btn" :href="`${globalInfo.clientAddress}/articleDetail/${row.articleId}`" target="_blank">
+                        {{ row.title }}
+                    </a>
+                </div>
             </template>
             <!-- 板块 -->
             <template #board="{ row }">
