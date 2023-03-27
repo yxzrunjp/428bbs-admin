@@ -1,10 +1,11 @@
 <template>
-    <div class="table-wrap" :style="{height:tableOptions.height + 'px'}">
+    <div class="table-wrap" :style="{ height: height + 'px' }">
         <div class="table">
-            <el-table stripe border highlight-current-row :max-height="tableOptions.height - paginationHeight" ref="tableRef"
-                :data="data.list" style="width: 100%" @selection-change="handleSelectionChange" @row-click="handleRowClick">
-                <el-table-column v-if="tableOptions.showSelect" type="selection" width="55" />
-                <template v-for="column in tableOptions.tableColumn" :key="column.prop">
+            <el-table stripe border highlight-current-row :max-height="height - paginationHeight"
+                ref="tableRef" :data="data.list" style="width: 100%" @selection-change="handleSelectionChange"
+                @row-click="handleRowClick">
+                <el-table-column v-if="showSelect" type="selection" width="55" />
+                <template v-for="column in tableColumn" :key="column.prop">
                     <el-table-column :prop="column.prop" :label="column.label" :width="column.width"
                         :align="column.align || 'center'">
                         <template v-if="column.scoped" #default="scope">
@@ -38,49 +39,41 @@ const prop = defineProps({
             }
         }
     },
-    tableOptions: {
-        type: Object,
+    showSelect: {
+        type: Boolean,
+        default: false,
+    },
+    height: {
+        type: Number,
+        default: 500,
+    },
+    tableColumn: {
+        type: Array,
         default: () => {
-            return {
-                showSelect: false,
-                height: 500,
-                paginationHeight: 50,
-                tableColumn: [
-                    {
-                        prop: 'date',
-                        label: '日期',
-                    },
-                    {
-                        prop: 'name',
-                        label: '名字',
-                    },
-                    {
-                        prop: 'address',
-                        label: '地址',
-                    },
-                ],
-            }
+            return []
         }
     }
 })
 
 const tableRef = ref(null)
-
+const emit = defineEmits(['sizeChange','pageChange','selected'])
 // 行点击
 const handleRowClick = () => {
     console.log(`row click`);
 }
 // 表格选择
-const handleSelectionChange = () => {
-    console.log(`selected`);
+const handleSelectionChange = (val) => {
+    emit('selected',val)
 }
 // 分页大小变化
 const handleSizeChange = (size) => {
     console.log(`size`, size);
+    emit('sizeChange',size)
 }
 // 页变化
 const handleCurrentChange = (page) => {
     console.log(`page`, page);
+    emit('pageChange',page)
 }
 </script>
 
@@ -89,6 +82,7 @@ const handleCurrentChange = (page) => {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+
     .pagination {
         display: flex;
         justify-content: flex-end;

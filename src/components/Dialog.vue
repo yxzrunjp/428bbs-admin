@@ -63,7 +63,7 @@ const close = () => {
 
     .el-dialog__footer {
         padding-top: 0;
-        text-align: center;
+        text-align: right;
     }
 
 }

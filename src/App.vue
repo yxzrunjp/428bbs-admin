@@ -13,13 +13,13 @@ const config = reactive({
   max: 1,
 })
 
-// const globalInfo = readonly({
-//   avatarUrl: '/api/file/getAvatar',
-//   getImageUrl:'/api/file/getImage',
-//   attachmentDownloadUrl:'/api/forum/attachmentDownload',
-// })
+const globalInfo = readonly({
+  avatarUrl: '/api/file/getAvatar',
+  getImageUrl:'/api/file/getImage',
+  attachmentDownloadUrl:'/api/forum/attachmentDownload',
+})
 
-// provide('globalInfo', globalInfo)
+provide('globalInfo', globalInfo)
 // provide('pagePxStore', pagePxStore)
 </script>
 
