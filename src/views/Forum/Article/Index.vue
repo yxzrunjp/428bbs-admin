@@ -60,7 +60,7 @@
                 </el-row>
             </el-form>
         </div>
-        <Table v-loading="loading" :showSelect="showSelect" :data="tableData" :tableColumn="tableColumn" :height="height"
+        <Table v-loading="loading" :showSelect="true" :data="tableData" :tableColumn="tableColumn" :height="height"
             @pageChange="handlePageChange" @sizeChange="handleSizeChange" @selected="selected">
             <!-- 用户信息 -->
             <template #userInfo="{ row }">
@@ -126,7 +126,6 @@
                     </div>
                 </div>
             </template>
-            <!-- 状态信息 -->
             <template #op="{ row }">
                 <template v-if="row.status !== -1">
                     <el-dropdown>
@@ -170,7 +169,6 @@ const { headerAndMenuHeight } = storeToRefs(pagePxStore)
 // 内容区域高度 = 可视区域高度-头部及标签高度 - 表单部分高度
 const height = document.documentElement.clientHeight - headerAndMenuHeight.value - 100
 
-const showSelect = ref(true)
 const loading = ref(false)
 const formData = reactive({
     boardInfo: null,
@@ -204,7 +202,6 @@ const tableColumn = [
         label: '标题',
         prop: 'title',
         scoped: 'title',
-        width: 200,
     },
     {
         label: '板块',
@@ -222,11 +219,13 @@ const tableColumn = [
         label: '是否有附件',
         prop: 'attachmentType',
         scoped: 'attachmentType',
+        width:100,
     },
     {
         label: '状态信息',
         prop: 'status',
         scoped: 'status',
+        width:100,
     },
     {
         label: '发布时间',
@@ -236,6 +235,7 @@ const tableColumn = [
     {
         label: '发布地址',
         prop: 'userIpAddress',
+        width:100,
     },
     {
         label: '操作',

@@ -84,3 +84,40 @@ export const loadArticleComment = async (params) => {
         params
     })
 }
+
+/**
+ * 获取所有评论
+ * @param {*} params 
+ * @returns 
+ */
+export const loadComment = async (params) => {
+    return request({
+        url: '/forum/loadComment',
+        params,
+        showLoading:false,
+    })
+}
+
+/**
+ * 删除评论
+ * @param {*} params 
+ * @returns 
+ */
+export const delComment = async (params)=>{
+    return request({
+        url: '/forum/delComment',
+        params
+    })
+}
+
+/**
+ * 审核评论
+ * @param {*} params 
+ * @returns 
+ */
+export const auditComment = async (params)=>{
+    return request({
+        url: '/forum/auditComment',
+        params
+    })
+}
