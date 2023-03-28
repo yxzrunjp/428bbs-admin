@@ -6,9 +6,8 @@
                     v-model="formData.message"></el-input>
             </el-form-item>
             <el-form-item :label="'积分'" prop="integral">
-                <!-- <el-input-number v-model="formData.integral" /> -->
-                <el-input v-model="formData.integral" /> 
-                <!--  :min="0" -->
+                <el-input-number v-model="formData.integral" />
+                <!-- <el-input v-model="formData.integral" />  -->
             </el-form-item>
         </el-form>
     </Dialog>
@@ -49,8 +48,7 @@ const userId = ref('')
 const formRef = ref(null)
 const formData = reactive({
     message: '',
-    integral: '',
-    // integral: 0,
+    integral: 0,
 })
 const rules = reactive({
     message: [
