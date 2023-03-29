@@ -12,7 +12,8 @@
             <div class="comment-content">
                 <div class="content">{{ data.content }}</div>
                 <div class="content-img" v-if="data.imgPath">
-                    <Cover :url="`${globalInfo.getImageUrl}/${data.imgPath.replace('.', '_.')}`" />
+                    <Cover @click="handlePreview(data.imgPath)"
+                        :url="`${globalInfo.getImageUrl}/${data.imgPath.replace('.', '_.')}`" />
                 </div>
             </div>
             <div class="other-info">
@@ -31,12 +32,18 @@
 <script setup>
 import { inject } from 'vue'
 const globalInfo = inject('globalInfo')
+const previewImg = inject('previewImg')
 const props = defineProps({
     data: {
         type: Object,
         required: true,
     },
 })
+
+const handlePreview = (imgPath) => {
+    const url = `${globalInfo.getImageUrl}/${imgPath}`
+    previewImg(url)
+}
 
 </script>
 

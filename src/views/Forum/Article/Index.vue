@@ -84,7 +84,8 @@
             <!-- 标题 -->
             <template #title="{ row }">
                 <div class="title">
-                    <a class="text-btn" :href="`${globalInfo.clientAddress}/articleDetail/${row.articleId}`" target="_blank">
+                    <a class="text-btn" :href="`${globalInfo.clientAddress}/articleDetail/${row.articleId}`"
+                        target="_blank">
                         {{ row.title }}
                     </a>
                 </div>
@@ -145,19 +146,22 @@
                 </template>
             </template>
         </Table>
+
         <UpdateBoard ref="updateBoardRef" :boardList="boardList" :boardProps="boardProps" @updateSuccess="getData" />
         <FileInfo ref="fileInfoRef" />
         <CommentInfo ref="commentInfoRef" />
+        <ImagePreview :urlList="urlList" :show="imgShow" @closeImg="closeImg" />
     </div>
 </template>
 
 <script setup>
+import ImagePreview from '@/components/ImagePreview.vue';
 import UpdateBoard from './components/UpdateBoard.vue';
 import FileInfo from './components/FileInfo.vue';
 import CommentInfo from './components/CommentInfo.vue'
 import { usePagePxStore } from '@/stores/pagePx.js'
 import { storeToRefs } from 'pinia'
-import { reactive, inject, ref, getCurrentInstance } from 'vue';
+import { reactive, inject, ref, getCurrentInstance, provide } from 'vue';
 import { loadArticle, delArticle, auditArticle, topArticle } from '@/api/article.js'
 import { loadBoard } from '@/api/board.js'
 
@@ -219,13 +223,13 @@ const tableColumn = [
         label: '是否有附件',
         prop: 'attachmentType',
         scoped: 'attachmentType',
-        width:100,
+        width: 100,
     },
     {
         label: '状态信息',
         prop: 'status',
         scoped: 'status',
-        width:100,
+        width: 100,
     },
     {
         label: '发布时间',
@@ -235,7 +239,7 @@ const tableColumn = [
     {
         label: '发布地址',
         prop: 'userIpAddress',
-        width:100,
+        width: 100,
     },
     {
         label: '操作',
@@ -323,6 +327,20 @@ const previewFileInfo = (row) => {
 const commentInfoRef = ref(null)
 const previewComment = (row) => {
     commentInfoRef.value.showCommentInfo(row)
+}
+
+// 预览评论中的图片
+const urlList = reactive([])
+const imgShow = ref(false)
+
+const previewImg = (url) => {
+    urlList.splice(0, urlList.length, url)
+    imgShow.value = true
+}
+// 提供给子组件调用
+provide('previewImg', previewImg)
+const closeImg = () => {
+    imgShow.value = false
 }
 
 // 处理分页变化

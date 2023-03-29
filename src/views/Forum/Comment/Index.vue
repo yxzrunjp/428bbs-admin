@@ -63,7 +63,8 @@
                     </div>
                     <div class="content-wrap">
                         <div class="content">{{ row.content }}</div>
-                        <Cover v-if="row.imgPath" :url="`${globalInfo.getImageUrl}/${row.imgPath.replace('.', '_.')}`" />
+                        <Cover @click.stop="previewImg(row)" v-if="row.imgPath"
+                            :url="`${globalInfo.getImageUrl}/${row.imgPath.replace('.', '_.')}`" />
                     </div>
                 </div>
             </template>
@@ -92,11 +93,12 @@
                 </template>
             </template>
         </Table>
+        <ImagePreview :urlList="imgList" :show="imgShow" @closeImg="closeImg" />
     </div>
 </template>
 
 <script setup>
-
+import ImagePreview from '@/components/ImagePreview.vue';
 import { usePagePxStore } from '@/stores/pagePx.js'
 import { storeToRefs } from 'pinia'
 import { reactive, inject, ref, getCurrentInstance } from 'vue';
@@ -218,7 +220,18 @@ const selected = (rowArr) => {
     selectedRow.splice(0, selectedRow.length, ...rowArr)
 }
 
-
+// 预览图片
+const imgList = reactive([])
+const imgShow = ref(false)
+const imgIdx = ref(0)
+const previewImg = (row) => {
+    const url = `${globalInfo.getImageUrl}/${row.imgPath}`
+    imgList.splice(0, imgList.length, url)
+    imgShow.value = true
+}
+const closeImg = () => {
+    imgShow.value = false
+}
 // 处理分页变化
 const handlePageChange = (page) => {
     tableData.pageNo = page
