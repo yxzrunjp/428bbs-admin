@@ -32,18 +32,26 @@ const router = createRouter({
       component: () => import('@/Layout/Index.vue'),
       redirect: 'forum/article',
       children: [
-        ...route
+        ...route,
       ]
     },
     {
       path: '/login',
       name: 'Login',
       component: () => import('@/views/Login/Index.vue'),
+    },
+    {
+      path: '/:pathMatch(.*)*',
+      name: 'NotFound',
+      meta: {
+        label: '该页面不存在'
+      },
+      component: () => import('@/views/NotFound/Index.vue')
     }
   ]
 })
 
-router.beforeEach((to,from,next)=>{
+router.beforeEach((to, from, next) => {
   document.title = to.meta.label
   next()
 })

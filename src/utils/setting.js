@@ -74,14 +74,5 @@ export const MenuList = [
                 },
             },
         ]
-    },
-    {
-        meta: {
-            icon: 'icon-settings',
-            label: '测试',
-        },
-        path: 'notfound',
-        name: 'NotFound',
-        component:'/src/views/NotFound/Index.vue'
     }
 ]
