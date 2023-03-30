@@ -108,7 +108,7 @@ const handleSubmit = async () => {
 const showEditBoard = ({ row, dialogTitle, pBoardName: pName }) => {
     for (const key in formData) {
         if (key === 'cover') {
-            src.value = row.cover ? `${globalInfo}/${row.cover}` : '';
+            src.value = row.cover ? `${globalInfo.getImageUrl}/${row.cover}` : '';
             continue
         }
         if (key === 'postType') {
