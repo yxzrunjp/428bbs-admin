@@ -23,7 +23,7 @@
 </template>
 
 <script setup>
-import { ref } from 'vue'
+import { ref, watch } from 'vue'
 
 const prop = defineProps({
     data: {
@@ -53,7 +53,12 @@ const prop = defineProps({
         }
     }
 })
-const paginationHeight = ref(prop.data.totalCount ? 50 : 0)
+const paginationHeight = ref(0)
+watch(() => prop.data, (newV) => {
+    if (newV.totalCount) {
+        paginationHeight.value = 50
+    }
+}, { deep: true })
 const tableRef = ref(null)
 const emit = defineEmits(['sizeChange', 'pageChange', 'selected', 'rowClick'])
 // 行点击
@@ -73,8 +78,8 @@ const handleCurrentChange = (page) => {
     emit('pageChange', page)
 }
 // 表格行选中
-const selecteRow = (key,value) => {
-    const row = prop.data.list.find(el=>{
+const selecteRow = (key, value) => {
+    const row = prop.data.list.find(el => {
         return el[key] === value
     })
     tableRef.value.setCurrentRow(row)
