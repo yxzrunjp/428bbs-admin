@@ -15,9 +15,9 @@ const config = reactive({
 
 const globalInfo = readonly({
   avatarUrl: '/api/file/getAvatar',
-  getImageUrl:'/api/file/getImage',
-  attachmentDownloadUrl:'/api/forum/attachmentDownload',
-  clientAddress:'http://localhost:3000',
+  getImageUrl: '/api/file/getImage',
+  attachmentDownloadUrl: '/api/forum/attachmentDownload',
+  clientAddress: import.meta.env.VITE_WEB_CLIENT_ADDRESS,
 })
 
 provide('globalInfo', globalInfo)
