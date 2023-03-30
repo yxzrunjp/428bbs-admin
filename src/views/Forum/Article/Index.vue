@@ -386,7 +386,7 @@ const getBoard = async () => {
     if (!result) {
         return
     }
-    Object.assign(boardList, result.data)
+    boardList.splice(0, boardList.length, ...result.data)
 }
 
 const init = async () => {

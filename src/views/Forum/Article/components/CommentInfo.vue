@@ -39,7 +39,7 @@ const getCommentInfo = async () => {
     if (!result) {
         return
     }
-    Object.assign(commentList,result.data)
+    commentList.splice(0,commentList.length,...result.data)
 }
 
 const showCommentInfo = (data) => {
